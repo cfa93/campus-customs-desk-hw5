@@ -1,0 +1,79 @@
+:root {
+  --bg: #0b0b0d;
+  --surface: #131316;
+  --surface-2: #1a1a1f;
+  --surface-3: #222229;
+  --line: #2a2a31;
+  --line-soft: #1f1f25;
+  --text: #f3f3f5;
+  --text-2: #b4b4bd;
+  --muted: #7d7d88;
+  --pink: #ff4fa3;
+  --pink-2: #ff7dbd;
+  --pink-dim: #3b1429;
+  --pink-glow: rgba(255, 79, 163, 0.18);
+  --ok: #4fd18b;
+  --ok-dim: #10301f;
+  --warn: #f5b64e;
+  --warn-dim: #33270f;
+  --bad: #ff6b6b;
+  --bad-dim: #3a1414;
+  --info: #7cb4ff;
+  --info-dim: #13233a;
+
+  /* agent colors (categorical, tuned for dark) */
+  --a-boss: #ff4fa3;
+  --a-inventory: #5ad1e6;
+  --a-accounting: #f5b64e;
+  --a-facilities: #a98bff;
+  --a-customer_service: #4fd18b;
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+  color-scheme: dark;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+code {
+  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  font-size: 0.86em;
+}
+
+::selection {
+  background: var(--pink-dim);
+}
+
+:focus-visible {
+  outline: 2px solid var(--pink);
+  outline-offset: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #2c2c34;
+  border-radius: 10px;
+  border: 2px solid var(--bg);
+}

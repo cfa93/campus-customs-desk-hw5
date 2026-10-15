@@ -1,0 +1,379 @@
+{
+  "generated_from": "Problem 9 run on campus_customs_new.db (reset to original first); data from /runs, /approvals, audit_trail.json and the MCP server",
+  "desk_date": "2026-08-31",
+  "starting_checking_balance": 3400.0,
+  "ending_checking_balance": 160.0,
+  "payments": [
+    {
+      "id": 1,
+      "kind": "invoice",
+      "ref_id": 501,
+      "amount": 840.0,
+      "account": "checking",
+      "paid_at": "2026-08-31",
+      "approved_by": "King"
+    },
+    {
+      "id": 2,
+      "kind": "lease",
+      "ref_id": 1,
+      "amount": 2400.0,
+      "account": "checking",
+      "paid_at": "2026-08-31",
+      "approved_by": "King"
+    }
+  ],
+  "tickets": [
+    {
+      "ticket_id": 101,
+      "type": "customer_order",
+      "requester": "Tauhid Zaman",
+      "subject": "Bulldog tee",
+      "final_status": "closed",
+      "final_status_label": "Resolved",
+      "outcome": "Size S tee out of stock (0 of 1). Invoice 501 ($840 rush reprint of that tee) paid after King approved. Customer reply drafted (not sent) offering M 5 / L 3 / XL 2 and an estimated restock of 2026-09-05. Resolved by King.",
+      "run": {
+        "run_id": "20261015T050457Z-ec0e21",
+        "started_at": "2026-10-15T05:04:57+00:00",
+        "finished_at": "2026-10-15T05:07:01+00:00",
+        "saved_status_decision": true,
+        "usage": {
+          "requests": 14,
+          "tool_calls": 16,
+          "input_tokens": 52133,
+          "output_tokens": 3689
+        }
+      },
+      "boss_decision": {
+        "status": "escalated",
+        "owner": "Boss",
+        "decision": "CC-TEE-WHITE size S quantity is 0 for the requested 1. Invoice 501 is an open, unpaid $840 reprint invoice, 3 days overdue, and covers this restock, so no separate purchase is requested. The $3,400 cash balance covers the $840 invoice and $2,400 rent due 2026-09-02, leaving $160. Escalated for human payment approval."
+      },
+      "delegations": [
+        {
+          "from": "Boss",
+          "to": "Inventory",
+          "depth": 1,
+          "task": "Ticket 101 customer order: check CC-TEE-WHITE size S qty 1. Linked invoice 501 (Rush reprint CC-TEE-WHITE S). Return exact stock/shortfall, quantities of all other sizes, restock vendor and lead time, and verify linked invoice/payment/cash-relevant facts by asking Accounting as needed. Do not double-order if invoice 501 covers restock."
+        },
+        {
+          "from": "Inventory",
+          "to": "Accounting",
+          "depth": 2,
+          "task": "For ticket 101, verify linked invoice 501 for Rush reprint CC-TEE-WHITE S: confirm invoice exists and exact amount, vendor and due date/status if recorded; verify whether invoice 501 has already been paid by checking matching payments, and report cash balance/relevant cash facts. Do not recommend or record payment; tell inventory whether this invoice itself covers the restock so no duplicate purchase is requested."
+        },
+        {
+          "from": "Boss",
+          "to": "Customer Service",
+          "depth": 1,
+          "task": "Ticket 101, customer order for 1 CC-TEE-WHITE size S. Verified facts: size S stock 0 (shortfall 1), M 5, L 3, XL 2; restock is covered by linked invoice 501 for Bulldog Print Co, $840 open, due 2026-08-28 and 3 days overdue on desk date 2026-08-31, no payment recorded. Vendor lead time 5 days, earliest possible restock 2026-09-05. Draft an honest customer reply for a human to review/send, with no guarantee and no promise of a specific contact."
+        }
+      ],
+      "agents": [
+        {
+          "agent": "Boss",
+          "mcp_tools_used": [
+            "get_desk",
+            "get_ticket_context",
+            "get_cash_position",
+            "update_ticket"
+          ],
+          "asked": [
+            "Inventory",
+            "Customer Service"
+          ],
+          "asked_by": [],
+          "did": "Handled ticket 101 only. Size S is out of stock (shortfall 1); the linked, unpaid invoice 501 covers the reprint. Cash covers invoice 501 and rent due 2026-09-02, leaving $160. Ticket escalated for human approval to pay the invoice. Customer-service draft is provided for human review; no message was sent.",
+          "status_set": [
+            "escalated"
+          ]
+        },
+        {
+          "agent": "Inventory",
+          "mcp_tools_used": [
+            "check_stock",
+            "list_vendors",
+            "get_desk"
+          ],
+          "asked": [
+            "Accounting"
+          ],
+          "asked_by": [
+            "Boss"
+          ],
+          "did": "Ticket 101: CC-TEE-WHITE size S has 0 available for the requested quantity of 1, so the shortfall is 1; storage location is Aisle B. Other sizes of CC-TEE-WHITE: M 5, L 3, XL 2. The fitting restock vendor is Bulldog Print Co (apparel reprint), with a 5-day lead time; using desk date 2026-08-31, the earliest possible restock date is 2026-09-05. Accounting verified linked invoice 501 is an open $840.00 invoice from Bulldog Print Co for “Rush reprint CC-TEE-WHITE S,” due 2026-08-28 (3 days overdue as of desk date). No matching payment is recorded ($0.00 paid). Cash is $3,400.00; after invoice 501 ($840.00) and lease 1 rent ($2,400.00, due 2026-09-02), $160.00 remains. Invoice 501 covers the reprint, so do not request a duplicate purchase/restock order."
+        },
+        {
+          "agent": "Accounting",
+          "mcp_tools_used": [
+            "check_invoice",
+            "get_cash_position",
+            "get_ticket"
+          ],
+          "asked": [],
+          "asked_by": [
+            "Inventory"
+          ],
+          "did": "Ticket 101 links invoice 501. It exists for $840.00 from Bulldog Print Co, due 2026-08-28, status open; as of desk date 2026-08-31 it is 3 days overdue. Its description is “Rush reprint CC-TEE-WHITE S.” No matching payments are recorded; amount paid is $0.00. The checking balance and total cash are $3,400.00. Relevant obligations shown are invoice 501 ($840.00) and rent for lease 1 ($2,400.00, due 2026-09-02), leaving $160.00 after all obligations. The linked invoice itself covers the Rush reprint of CC-TEE-WHITE size S, so do not request a duplicate purchase for this restock."
+        },
+        {
+          "agent": "Customer Service",
+          "mcp_tools_used": [
+            "get_ticket",
+            "check_stock",
+            "get_pricing"
+          ],
+          "asked": [],
+          "asked_by": [
+            "Boss"
+          ],
+          "did": "Draft for a human to review and send; no message has been sent.",
+          "draft_message_not_sent": "Hi Tauhid, thanks for your order. We’re sorry, but the Classic Bulldog Tee in size S is currently out of stock, so we can’t fulfill that size right now. We have sizes M (5 available), L (3 available), and XL (2 available) if you’d like to consider another size. The list price is $28. Our current restock estimate for size S is September 5, 2026, but that timing isn’t guaranteed. Please let us know if you’d prefer an available size or would like to wait."
+        }
+      ],
+      "agents_not_involved": [
+        "Facilities"
+      ],
+      "human_approvals": [
+        {
+          "approval_id": 4,
+          "request": "invoice_payment",
+          "ref_id": 501,
+          "amount": 840.0,
+          "agent_reason": "Invoice 501 to Bulldog Print Co for the CC-TEE-WHITE S rush reprint is open, unpaid, and 3 days overdue as of 2026-08-31. Available cash is $3,400; after this invoice and rent of $2,400 due 2026-09-02, $160 remains.",
+          "decision": "approved",
+          "decided_by": "King",
+          "decided_at": "2026-10-15T05:09:45+00:00",
+          "note": null,
+          "payment_recorded": {
+            "id": 1,
+            "kind": "invoice",
+            "ref_id": 501,
+            "amount": 840.0,
+            "account": "checking",
+            "paid_at": "2026-08-31",
+            "approved_by": "King"
+          }
+        }
+      ],
+      "ticket_notes": "Needs a tee in size S.\n[2026-08-31] CC-TEE-WHITE S stock 0; shortfall 1. Linked invoice 501 is $840 open, due 2026-08-28 (3 days overdue), unpaid; it covers the reprint, so no duplicate purchase. Cash $3,400 covers invoice plus $2,400 rent due 2026-09-02, leaving $160. Escalated for human invoice-payment approval; 5-day restock estimate is 2026-09-05, not guaranteed.\n[2026-08-31] Human approval #4 by King: paid $840.00 (invoice 501); checking now $2,560.00.\n[2026-08-31] Resolved by King."
+    },
+    {
+      "ticket_id": 102,
+      "type": "rent_notice",
+      "requester": "Elm City Properties",
+      "subject": "Rent due",
+      "final_status": "closed",
+      "final_status_label": "Resolved",
+      "outcome": "Emailed rent notice verified against lease 1 (Elm City Properties, $2,400, due 2026-09-02). Rent paid after King approved; lease next due moved to 2026-10-02. Resolved by King.",
+      "run": {
+        "run_id": "20261015T050708Z-04c732",
+        "started_at": "2026-10-15T05:07:08+00:00",
+        "finished_at": "2026-10-15T05:07:36+00:00",
+        "saved_status_decision": true,
+        "usage": {
+          "requests": 6,
+          "tool_calls": 9,
+          "input_tokens": 22076,
+          "output_tokens": 1290
+        }
+      },
+      "boss_decision": {
+        "status": "escalated",
+        "owner": "Facilities",
+        "decision": "Lease 1 confirms Elm City Properties, monthly rent $2,400, due 2026-09-02; no rent payment is recorded. Human approval is required before payment."
+      },
+      "delegations": [
+        {
+          "from": "Boss",
+          "to": "Facilities",
+          "depth": 1,
+          "task": "Ticket 102, rent_notice, lease_id 1. Verify the requester Elm City Properties' claim against lease 1: landlord, rent amount and next due date. Check whether rent is already paid. Return concise facts."
+        }
+      ],
+      "agents": [
+        {
+          "agent": "Boss",
+          "mcp_tools_used": [
+            "get_desk",
+            "list_open_tickets",
+            "get_ticket_context",
+            "get_cash_position",
+            "update_ticket"
+          ],
+          "asked": [
+            "Facilities"
+          ],
+          "asked_by": [],
+          "did": "Handled ticket 102 only. Lease 1 rent claim was verified and the ticket was escalated for human approval. Shared cash is $3,400; rent of $2,400 due 2026-09-02 and open invoice 501 for $840, overdue since 2026-08-28, fit within cash, leaving $160 if both are paid.",
+          "status_set": [
+            "escalated"
+          ]
+        },
+        {
+          "agent": "Facilities",
+          "mcp_tools_used": [
+            "get_ticket",
+            "get_desk",
+            "check_lease"
+          ],
+          "asked": [],
+          "asked_by": [
+            "Boss"
+          ],
+          "did": "Ticket 102’s email claim (“shop rent due in 2 days”) matches lease 1: requester/landlord is Elm City Properties; rent is $2,400.00 per month; next due date is 2026-09-02, which is 2 days from the desk date 2026-08-31. No rent payments are recorded for lease 1. Recommend payment of $2,400.00 by 2026-09-02, subject to human approval."
+        }
+      ],
+      "agents_not_involved": [
+        "Inventory",
+        "Accounting",
+        "Customer Service"
+      ],
+      "human_approvals": [
+        {
+          "approval_id": 5,
+          "request": "rent_payment",
+          "ref_id": 1,
+          "amount": 2400.0,
+          "agent_reason": "Human approval required for lease 1 rent, due 2026-09-02. No rent payment is recorded; available cash covers this and open invoice 501, leaving $160 if both obligations are paid.",
+          "decision": "approved",
+          "decided_by": "King",
+          "decided_at": "2026-10-15T05:09:45+00:00",
+          "note": null,
+          "payment_recorded": {
+            "id": 2,
+            "kind": "lease",
+            "ref_id": 1,
+            "amount": 2400.0,
+            "account": "checking",
+            "paid_at": "2026-08-31",
+            "approved_by": "King"
+          }
+        }
+      ],
+      "ticket_notes": "Email: shop rent due in 2 days.\n[2026-08-31] Lease 1 verified: Elm City Properties, $2,400 rent due 2026-09-02; no rent payment recorded. Cash $3,400 covers rent and open invoice 501 ($840, due 2026-08-28), leaving $160; escalated for human rent-payment approval.\n[2026-08-31] Human approval #5 by King: paid $2,400.00 (lease 1); checking now $160.00.\n[2026-08-31] Resolved by King."
+    },
+    {
+      "ticket_id": 103,
+      "type": "price_override",
+      "requester": "Yale AI Club",
+      "subject": "Bulk hoodie discount",
+      "final_status": "closed",
+      "final_status_label": "Resolved",
+      "outcome": "Only 8 of 20 size-M hoodies in stock. Agents proposed no discount; King rejected the price override, so list price $58 stands. Customer reply drafted (not sent) quoting list price. Resolved by King.",
+      "run": {
+        "run_id": "20261015T050742Z-5c9a3e",
+        "started_at": "2026-10-15T05:07:42+00:00",
+        "finished_at": "2026-10-15T05:08:38+00:00",
+        "saved_status_decision": true,
+        "usage": {
+          "requests": 11,
+          "tool_calls": 12,
+          "input_tokens": 40442,
+          "output_tokens": 2776
+        }
+      },
+      "boss_decision": {
+        "status": "escalated",
+        "owner": "Accounting",
+        "decision": "Human price decision required; no discount was approved. CC-HOOD-NAVY size M stock is 8 against 20 requested (shortfall 12). List is $58 each: 20 × $58 = $1,160; unit cost is $22, so margin at list is $36 each, $720 total. Cost floor is $22 each, $440 total. Draft reply prepared; not sent."
+      },
+      "delegations": [
+        {
+          "from": "Boss",
+          "to": "Accounting",
+          "depth": 1,
+          "task": "Ticket 103 price_override: Yale AI Club requests 20 units of SKU CC-HOOD-NAVY, size M. Check available stock with Inventory first. Return list total, unit-cost floor, margin at list, and discount room; identify any stock shortfall. Do not approve a discount."
+        },
+        {
+          "from": "Accounting",
+          "to": "Inventory",
+          "depth": 2,
+          "task": "For ticket 103, check available inventory for SKU CC-HOOD-NAVY, size M, requested quantity 20. Report exact quantity in that size, any shortfall, and other sizes/quantities if size M is short."
+        },
+        {
+          "from": "Boss",
+          "to": "Customer Service",
+          "depth": 1,
+          "task": "Ticket 103: Draft a customer reply for Yale AI Club's request for 20 CC-HOOD-NAVY hoodies, size M, asking for a bulk discount. Verified: size M stock is 8, shortfall 12; other sizes S 4, L 14, XL 6, with no substitution assumed. List price $58/unit, cost $22/unit. For 20, list total $1,160, cost floor total $440 and margin at list $720; no discount amount was specified, and no discount is approved. Do not promise a discount, substitute, restock date, or contact; provide draft only."
+        }
+      ],
+      "agents": [
+        {
+          "agent": "Boss",
+          "mcp_tools_used": [
+            "get_desk",
+            "get_ticket_context",
+            "get_cash_position",
+            "update_ticket"
+          ],
+          "asked": [
+            "Accounting",
+            "Customer Service"
+          ],
+          "asked_by": [],
+          "did": "Handled ticket 103 only. Verified pricing and stock, obtained a customer-service draft, and escalated the ticket because any below-list price requires human approval. No payment or purchase was requested.",
+          "status_set": [
+            "escalated"
+          ]
+        },
+        {
+          "agent": "Accounting",
+          "mcp_tools_used": [
+            "get_pricing"
+          ],
+          "asked": [
+            "Inventory"
+          ],
+          "asked_by": [
+            "Boss"
+          ],
+          "did": "For ticket 103, SKU CC-HOOD-NAVY, size M: list price is $58.00 per unit and unit cost is $22.00. For the requested 20 units, list total is $1,160.00; unit-cost floor total is $440.00; margin at list is $36.00 per unit, or $720.00 total. Maximum discount room down to the unit-cost floor is $36.00 per unit ($720.00 total), leaving no margin at the floor; any below-list price requires human approval. Inventory has 8 units in size M, so there is a shortfall of 12. For the 8 units currently in stock: list total $464.00, cost floor $176.00, margin at list $288.00, and maximum discount room to cost floor $288.00. Other sizes reported: S — 4, L — 14, XL — 6; no size substitutions assumed."
+        },
+        {
+          "agent": "Inventory",
+          "mcp_tools_used": [
+            "check_stock"
+          ],
+          "asked": [],
+          "asked_by": [
+            "Accounting"
+          ],
+          "did": "Ticket 103: CC-HOOD-NAVY size M has 8 units available against the requested 20, so stock is short by 12. Storage location: Aisle A. Other sizes: S — 4 units; L — 14 units; XL — 6 units."
+        },
+        {
+          "agent": "Customer Service",
+          "mcp_tools_used": [
+            "get_ticket",
+            "check_stock",
+            "get_pricing"
+          ],
+          "asked": [],
+          "asked_by": [
+            "Boss"
+          ],
+          "did": "Draft only; no message has been sent.",
+          "draft_message_not_sent": "Hello Yale AI Club,\n\nThanks for reaching out about 20 CC-HOOD-NAVY hoodies in size M. We currently have 8 in size M, so we're short 12 for your requested quantity. Other sizes currently available are S (4), L (14), and XL (6); we have not assumed any substitutions. The list price is $58 per hoodie, or $1,160 for 20 at list price. Your bulk discount request is being reviewed by a manager, and no discounted price has been approved or quoted.\n\nBest,\nCampus Customs Shop"
+        }
+      ],
+      "agents_not_involved": [
+        "Facilities"
+      ],
+      "human_approvals": [
+        {
+          "approval_id": 6,
+          "request": "price_override",
+          "ref_id": null,
+          "amount": null,
+          "agent_reason": "Human approval is needed before quoting any price below the $58 list price. The customer did not specify a discount amount; no override amount is proposed.",
+          "decision": "rejected",
+          "decided_by": "King",
+          "decided_at": "2026-10-15T05:09:46+00:00",
+          "note": "No discount. Quote list price $58 per hoodie.",
+          "payment_recorded": null
+        }
+      ],
+      "ticket_notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.\n[2026-08-31] Size M stock 8/20; shortfall 12. List price $58 each ($1,160 total); unit cost $22, margin at list $720 total. No discount amount specified or approved; escalated for human price decision. Draft reply prepared.\n[2026-08-31] Human rejected request #6 (price_override) - King: No discount. Quote list price $58 per hoodie.\n[2026-08-31] Resolved by King."
+    }
+  ]
+}

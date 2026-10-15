@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campus Customs: Resolved Tickets Board</title>
+<style>
+  :root { --bg:#0a0a0a; --panel:#141414; --line:#2a2a2a; --pink:#ff4fa3; --pink-soft:#ff8cc6; --text:#f5f5f5; --muted:#a0a0a0; --ok:#4fd18b; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  .top { padding:28px 32px 20px; border-bottom:1px solid var(--line); background:linear-gradient(180deg,#160910 0%,var(--bg) 100%); }
+  .top h1 { margin:0; font-size:26px; } .top h1 span { color:var(--pink); }
+  .top p { margin:6px 0 0; color:var(--muted); }
+  .stats { display:flex; gap:12px; flex-wrap:wrap; margin-top:16px; }
+  .stat { background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:10px 16px; min-width:170px; }
+  .stat small { display:block; color:var(--muted); text-transform:uppercase; letter-spacing:1px; font-size:11px; }
+  .stat b { font-size:22px; color:var(--pink); }
+  nav { display:flex; gap:8px; padding:14px 32px; border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--bg); z-index:2; }
+  nav a { color:var(--muted); text-decoration:none; border:1px solid var(--line); padding:5px 12px; border-radius:999px; font-size:13px; }
+  nav a:hover { color:var(--pink); border-color:var(--pink); }
+  main { padding:8px 32px 40px; max-width:1500px; }
+  .ticket { border:1px solid var(--line); border-radius:14px; background:var(--panel); padding:20px 22px; margin-top:22px; }
+  .ticket header { display:flex; justify-content:space-between; align-items:flex-start; }
+  .eyebrow { color:var(--muted); font-size:13px; text-transform:capitalize; }
+  h2 { margin:2px 0 0; font-size:21px; }
+  .badge { color:var(--ok); border:1px solid #1f5a3a; background:#10301f; padding:3px 12px; border-radius:999px; font-weight:600; font-size:13px; }
+  .outcome { border-left:3px solid var(--pink); padding:6px 12px; background:#1b1b1b; border-radius:0 8px 8px 0; margin:14px 0; }
+  .facts { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:12px; }
+  .facts > div { background:#1b1b1b; border:1px solid var(--line); border-radius:10px; padding:10px 14px; }
+  h3 { margin:0 0 6px; color:var(--pink); font-size:12px; text-transform:uppercase; letter-spacing:1.2px; }
+  .facts p, .facts ul { margin:0; font-size:14px; } .facts ul { padding-left:18px; }
+  .muted { color:var(--muted); font-size:12.5px !important; margin-top:6px !important; }
+  code { color:var(--pink-soft); font-size:12.5px; }
+  .shots { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:16px; align-items:start; }
+  @media (max-width:1000px) { .shots { grid-template-columns:1fr; } }
+  figure { margin:0; }
+  figure img { width:100%; display:block; border:1px solid var(--line); border-radius:10px; transition:border-color .15s; }
+  figure a:hover img { border-color:var(--pink); }
+  figcaption { color:var(--muted); font-size:13px; margin-top:6px; }
+  footer { padding:18px 32px 30px; color:var(--muted); font-size:13px; border-top:1px solid var(--line); }
+</style>
+</head>
+<body>
+<div class="top">
+  <h1>Campus Customs <span>Resolved Tickets</span></h1>
+  <p>Problem 9: the database was reset to its original data, then all 3 tickets were run through the dashboard and resolved. Every payment was approved by King first.</p>
+  <div class="stats">
+    <div class="stat"><small>Tickets resolved</small><b>3 / 3</b></div>
+    <div class="stat"><small>Starting checking</small><b>$3,400</b></div>
+    <div class="stat"><small>Paid (human-approved)</small><b>$3,240</b></div>
+    <div class="stat"><small>Ending checking</small><b>$160</b></div>
+  </div>
+</div>
+<nav><a href="#t101">#101 Bulldog tee</a><a href="#t102">#102 Rent due</a><a href="#t103">#103 Bulk hoodie discount</a></nav>
+<main>
+<section class="ticket" id="t101">
+  <header>
+    <div>
+      <div class="eyebrow">customer order · Tauhid Zaman</div>
+      <h2>#101 Bulldog tee</h2>
+    </div>
+    <span class="badge">Resolved</span>
+  </header>
+  <p class="outcome">Size S tee out of stock (0 of 1). Invoice 501 ($840 rush reprint of that tee) paid after King approved. Customer reply drafted (not sent) offering M 5 / L 3 / XL 2 and an estimated restock of 2026-09-05. Resolved by King.</p>
+  <div class="facts">
+    <div><h3>Delegations</h3><p>Boss → Inventory · Inventory → Accounting · Boss → Customer Service</p><p class="muted">Not involved: Facilities</p></div>
+    <div><h3>MCP tools used</h3><ul><li><b>Boss</b>: <code>get_desk</code>, <code>get_ticket_context</code>, <code>get_cash_position</code>, <code>update_ticket</code></li><li><b>Inventory</b>: <code>check_stock</code>, <code>list_vendors</code>, <code>get_desk</code></li><li><b>Accounting</b>: <code>check_invoice</code>, <code>get_cash_position</code>, <code>get_ticket</code></li><li><b>Customer Service</b>: <code>get_ticket</code>, <code>check_stock</code>, <code>get_pricing</code></li></ul></div>
+    <div><h3>Human approvals</h3><ul><li><b>Invoice payment $840</b>: approved by King (payment #1)</li></ul><p class="muted">Run 20261015T050457Z-ec0e21 · 14 model calls · 55,822 tokens</p></div>
+  </div>
+  <div class="shots">
+    <figure><a href="screenshots/ticket_101_summary.png" target="_blank"><img src="screenshots/ticket_101_summary.png" alt="Dashboard: ticket 101 agent summaries after it was resolved" loading="lazy"></a>
+      <figcaption>Agent summaries: what each agent concluded</figcaption></figure>
+    <figure><a href="screenshots/ticket_101_live.png" target="_blank"><img src="screenshots/ticket_101_live.png" alt="Dashboard: ticket 101 live activity feed" loading="lazy"></a>
+      <figcaption>Live activity: who was asked and each step</figcaption></figure>
+  </div>
+</section>
+<section class="ticket" id="t102">
+  <header>
+    <div>
+      <div class="eyebrow">rent notice · Elm City Properties</div>
+      <h2>#102 Rent due</h2>
+    </div>
+    <span class="badge">Resolved</span>
+  </header>
+  <p class="outcome">Emailed rent notice verified against lease 1 (Elm City Properties, $2,400, due 2026-09-02). Rent paid after King approved; lease next due moved to 2026-10-02. Resolved by King.</p>
+  <div class="facts">
+    <div><h3>Delegations</h3><p>Boss → Facilities</p><p class="muted">Not involved: Inventory, Accounting, Customer Service</p></div>
+    <div><h3>MCP tools used</h3><ul><li><b>Boss</b>: <code>get_desk</code>, <code>list_open_tickets</code>, <code>get_ticket_context</code>, <code>get_cash_position</code>, <code>update_ticket</code></li><li><b>Facilities</b>: <code>get_ticket</code>, <code>get_desk</code>, <code>check_lease</code></li></ul></div>
+    <div><h3>Human approvals</h3><ul><li><b>Rent payment $2,400</b>: approved by King (payment #2)</li></ul><p class="muted">Run 20261015T050708Z-04c732 · 6 model calls · 23,366 tokens</p></div>
+  </div>
+  <div class="shots">
+    <figure><a href="screenshots/ticket_102_summary.png" target="_blank"><img src="screenshots/ticket_102_summary.png" alt="Dashboard: ticket 102 agent summaries after it was resolved" loading="lazy"></a>
+      <figcaption>Agent summaries: what each agent concluded</figcaption></figure>
+    <figure><a href="screenshots/ticket_102_live.png" target="_blank"><img src="screenshots/ticket_102_live.png" alt="Dashboard: ticket 102 live activity feed" loading="lazy"></a>
+      <figcaption>Live activity: who was asked and each step</figcaption></figure>
+  </div>
+</section>
+<section class="ticket" id="t103">
+  <header>
+    <div>
+      <div class="eyebrow">price override · Yale AI Club</div>
+      <h2>#103 Bulk hoodie discount</h2>
+    </div>
+    <span class="badge">Resolved</span>
+  </header>
+  <p class="outcome">Only 8 of 20 size-M hoodies in stock. Agents proposed no discount; King rejected the price override, so list price $58 stands. Customer reply drafted (not sent) quoting list price. Resolved by King.</p>
+  <div class="facts">
+    <div><h3>Delegations</h3><p>Boss → Accounting · Accounting → Inventory · Boss → Customer Service</p><p class="muted">Not involved: Facilities</p></div>
+    <div><h3>MCP tools used</h3><ul><li><b>Boss</b>: <code>get_desk</code>, <code>get_ticket_context</code>, <code>get_cash_position</code>, <code>update_ticket</code></li><li><b>Accounting</b>: <code>get_pricing</code></li><li><b>Inventory</b>: <code>check_stock</code></li><li><b>Customer Service</b>: <code>get_ticket</code>, <code>check_stock</code>, <code>get_pricing</code></li></ul></div>
+    <div><h3>Human approvals</h3><ul><li><b>Price override —</b>: rejected by King</li></ul><p class="muted">Run 20261015T050742Z-5c9a3e · 11 model calls · 43,218 tokens</p></div>
+  </div>
+  <div class="shots">
+    <figure><a href="screenshots/ticket_103_summary.png" target="_blank"><img src="screenshots/ticket_103_summary.png" alt="Dashboard: ticket 103 agent summaries after it was resolved" loading="lazy"></a>
+      <figcaption>Agent summaries: what each agent concluded</figcaption></figure>
+    <figure><a href="screenshots/ticket_103_live.png" target="_blank"><img src="screenshots/ticket_103_live.png" alt="Dashboard: ticket 103 live activity feed" loading="lazy"></a>
+      <figcaption>Live activity: who was asked and each step</figcaption></figure>
+  </div>
+</section>
+</main>
+<footer>Screenshots were taken from the live dashboard (http://localhost:5173) after all 3 tickets were resolved. Data comes from <code>output/resolved_tickets.json</code>. Click any screenshot for full size.</footer>
+</body>
+</html>

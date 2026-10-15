@@ -1,0 +1,439 @@
+{
+  "database": "data/campus_customs_new.db",
+  "server": "campus-customs",
+  "desk_date": "2026-08-31",
+  "tests": [
+    {
+      "prompt": "problem 4: test all 3 MCP tools we connected. check outputs match campus_customs_new.db and save results in output/mcp_smoke.json. for each tool include prompt i used, tool name and actual output.",
+      "tool": "list_open_tickets",
+      "calls": [
+        {
+          "arguments": {},
+          "output": {
+            "desk_date": "2026-08-31",
+            "count": 3,
+            "tickets": [
+              {
+                "id": 101,
+                "type": "customer_order",
+                "requester": "Tauhid Zaman",
+                "subject": "Bulldog tee",
+                "sku": "CC-TEE-WHITE",
+                "size": "S",
+                "qty": 1,
+                "lease_id": null,
+                "invoice_id": 501,
+                "status": "open",
+                "notes": "Needs a tee in size S.",
+                "created_at": "2026-08-31T09:15:00-04:00"
+              },
+              {
+                "id": 102,
+                "type": "rent_notice",
+                "requester": "Elm City Properties",
+                "subject": "Rent due",
+                "sku": null,
+                "size": null,
+                "qty": null,
+                "lease_id": 1,
+                "invoice_id": null,
+                "status": "open",
+                "notes": "Email: shop rent due in 2 days.",
+                "created_at": "2026-08-31T11:05:00-04:00"
+              },
+              {
+                "id": 103,
+                "type": "price_override",
+                "requester": "Yale AI Club",
+                "subject": "Bulk hoodie discount",
+                "sku": "CC-HOOD-NAVY",
+                "size": "M",
+                "qty": 20,
+                "lease_id": null,
+                "invoice_id": null,
+                "status": "open",
+                "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.",
+                "created_at": "2026-08-31T16:55:00-04:00"
+              }
+            ]
+          },
+          "db_checks": [
+            {
+              "check": "desk_date matches desk.date_today",
+              "pass": true
+            },
+            {
+              "check": "count matches open tickets in db",
+              "pass": true
+            },
+            {
+              "check": "every ticket row matches db exactly",
+              "pass": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": "problem 4: test all 3 MCP tools we connected. check outputs match campus_customs_new.db and save results in output/mcp_smoke.json. for each tool include prompt i used, tool name and actual output.",
+      "tool": "get_ticket_context",
+      "calls": [
+        {
+          "arguments": {
+            "ticket_id": 101
+          },
+          "output": {
+            "ticket": {
+              "id": 101,
+              "type": "customer_order",
+              "requester": "Tauhid Zaman",
+              "subject": "Bulldog tee",
+              "sku": "CC-TEE-WHITE",
+              "size": "S",
+              "qty": 1,
+              "lease_id": null,
+              "invoice_id": 501,
+              "status": "open",
+              "notes": "Needs a tee in size S.",
+              "created_at": "2026-08-31T09:15:00-04:00"
+            },
+            "desk_date": "2026-08-31",
+            "cash_accounts": [
+              {
+                "name": "checking",
+                "balance": 3400,
+                "date": "2026-08-31"
+              }
+            ],
+            "inventory_requested_size": {
+              "sku": "CC-TEE-WHITE",
+              "name": "Classic Bulldog Tee",
+              "size": "S",
+              "qty": 0,
+              "location": "Aisle B"
+            },
+            "inventory_all_sizes": [
+              {
+                "sku": "CC-TEE-WHITE",
+                "name": "Classic Bulldog Tee",
+                "size": "S",
+                "qty": 0,
+                "location": "Aisle B"
+              },
+              {
+                "sku": "CC-TEE-WHITE",
+                "name": "Classic Bulldog Tee",
+                "size": "M",
+                "qty": 5,
+                "location": "Aisle B"
+              },
+              {
+                "sku": "CC-TEE-WHITE",
+                "name": "Classic Bulldog Tee",
+                "size": "L",
+                "qty": 3,
+                "location": "Aisle B"
+              },
+              {
+                "sku": "CC-TEE-WHITE",
+                "name": "Classic Bulldog Tee",
+                "size": "XL",
+                "qty": 2,
+                "location": "Aisle B"
+              }
+            ],
+            "pricing": {
+              "sku": "CC-TEE-WHITE",
+              "unit_cost": 8,
+              "list_price": 28
+            },
+            "invoice": {
+              "id": 501,
+              "vendor_id": 1,
+              "amount": 840,
+              "due_date": "2026-08-28",
+              "status": "open",
+              "description": "Rush reprint CC-TEE-WHITE S"
+            },
+            "vendor": {
+              "id": 1,
+              "name": "Bulldog Print Co",
+              "specialty": "apparel reprint",
+              "lead_days": 5
+            },
+            "invoice_payments": [],
+            "warnings": [
+              "Insufficient stock: requested 1, available 0 (CC-TEE-WHITE S).",
+              "Invoice 501 is overdue (due 2026-08-28, today 2026-08-31)."
+            ]
+          },
+          "db_checks": [
+            {
+              "check": "ticket row matches db",
+              "pass": true
+            },
+            {
+              "check": "desk_date matches db",
+              "pass": true
+            },
+            {
+              "check": "cash_accounts match db",
+              "pass": true
+            },
+            {
+              "check": "inventory (requested size) matches db",
+              "pass": true
+            },
+            {
+              "check": "inventory (all sizes) matches db",
+              "pass": true
+            },
+            {
+              "check": "pricing matches db",
+              "pass": true
+            },
+            {
+              "check": "invoice matches db",
+              "pass": true
+            },
+            {
+              "check": "vendor matches db",
+              "pass": true
+            },
+            {
+              "check": "invoice payments match db",
+              "pass": true
+            }
+          ]
+        },
+        {
+          "arguments": {
+            "ticket_id": 102
+          },
+          "output": {
+            "ticket": {
+              "id": 102,
+              "type": "rent_notice",
+              "requester": "Elm City Properties",
+              "subject": "Rent due",
+              "sku": null,
+              "size": null,
+              "qty": null,
+              "lease_id": 1,
+              "invoice_id": null,
+              "status": "open",
+              "notes": "Email: shop rent due in 2 days.",
+              "created_at": "2026-08-31T11:05:00-04:00"
+            },
+            "desk_date": "2026-08-31",
+            "cash_accounts": [
+              {
+                "name": "checking",
+                "balance": 3400,
+                "date": "2026-08-31"
+              }
+            ],
+            "lease": {
+              "id": 1,
+              "space_name": "Chapel Street shop",
+              "landlord": "Elm City Properties",
+              "monthly_rent": 2400,
+              "next_due": "2026-09-02",
+              "notes": null
+            },
+            "lease_payments": [],
+            "warnings": []
+          },
+          "db_checks": [
+            {
+              "check": "ticket row matches db",
+              "pass": true
+            },
+            {
+              "check": "desk_date matches db",
+              "pass": true
+            },
+            {
+              "check": "cash_accounts match db",
+              "pass": true
+            },
+            {
+              "check": "lease matches db",
+              "pass": true
+            },
+            {
+              "check": "lease payments match db",
+              "pass": true
+            }
+          ]
+        },
+        {
+          "arguments": {
+            "ticket_id": 103
+          },
+          "output": {
+            "ticket": {
+              "id": 103,
+              "type": "price_override",
+              "requester": "Yale AI Club",
+              "subject": "Bulk hoodie discount",
+              "sku": "CC-HOOD-NAVY",
+              "size": "M",
+              "qty": 20,
+              "lease_id": null,
+              "invoice_id": null,
+              "status": "open",
+              "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.",
+              "created_at": "2026-08-31T16:55:00-04:00"
+            },
+            "desk_date": "2026-08-31",
+            "cash_accounts": [
+              {
+                "name": "checking",
+                "balance": 3400,
+                "date": "2026-08-31"
+              }
+            ],
+            "inventory_requested_size": {
+              "sku": "CC-HOOD-NAVY",
+              "name": "Basic Hoodie Big Yale",
+              "size": "M",
+              "qty": 8,
+              "location": "Aisle A"
+            },
+            "inventory_all_sizes": [
+              {
+                "sku": "CC-HOOD-NAVY",
+                "name": "Basic Hoodie Big Yale",
+                "size": "S",
+                "qty": 4,
+                "location": "Aisle A"
+              },
+              {
+                "sku": "CC-HOOD-NAVY",
+                "name": "Basic Hoodie Big Yale",
+                "size": "M",
+                "qty": 8,
+                "location": "Aisle A"
+              },
+              {
+                "sku": "CC-HOOD-NAVY",
+                "name": "Basic Hoodie Big Yale",
+                "size": "L",
+                "qty": 14,
+                "location": "Aisle A"
+              },
+              {
+                "sku": "CC-HOOD-NAVY",
+                "name": "Basic Hoodie Big Yale",
+                "size": "XL",
+                "qty": 6,
+                "location": "Aisle A"
+              }
+            ],
+            "pricing": {
+              "sku": "CC-HOOD-NAVY",
+              "unit_cost": 22,
+              "list_price": 58
+            },
+            "warnings": [
+              "Insufficient stock: requested 20, available 8 (CC-HOOD-NAVY M)."
+            ]
+          },
+          "db_checks": [
+            {
+              "check": "ticket row matches db",
+              "pass": true
+            },
+            {
+              "check": "desk_date matches db",
+              "pass": true
+            },
+            {
+              "check": "cash_accounts match db",
+              "pass": true
+            },
+            {
+              "check": "inventory (requested size) matches db",
+              "pass": true
+            },
+            {
+              "check": "inventory (all sizes) matches db",
+              "pass": true
+            },
+            {
+              "check": "pricing matches db",
+              "pass": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "prompt": "problem 4: test all 3 MCP tools we connected. check outputs match campus_customs_new.db and save results in output/mcp_smoke.json. for each tool include prompt i used, tool name and actual output.",
+      "tool": "update_ticket",
+      "calls": [
+        {
+          "arguments": {
+            "ticket_id": 101,
+            "status": "done",
+            "note": "MCP smoke test: invalid status check"
+          },
+          "output": {
+            "error": "Invalid status 'done'. Allowed: ['closed', 'escalated', 'in_progress', 'open']"
+          },
+          "db_checks": [
+            {
+              "check": "invalid status 'done' rejected with error",
+              "pass": true
+            }
+          ]
+        },
+        {
+          "arguments": {
+            "ticket_id": 101,
+            "status": "open",
+            "note": "MCP smoke test: write check"
+          },
+          "output": {
+            "previous_status": "open",
+            "ticket": {
+              "id": 101,
+              "type": "customer_order",
+              "requester": "Tauhid Zaman",
+              "subject": "Bulldog tee",
+              "sku": "CC-TEE-WHITE",
+              "size": "S",
+              "qty": 1,
+              "lease_id": null,
+              "invoice_id": 501,
+              "status": "open",
+              "notes": "Needs a tee in size S.\n[2026-08-31] MCP smoke test: write check",
+              "created_at": "2026-08-31T09:15:00-04:00"
+            }
+          },
+          "db_checks": [
+            {
+              "check": "returned ticket matches db row after write",
+              "pass": true
+            },
+            {
+              "check": "original notes kept and test note appended with desk date",
+              "pass": true
+            },
+            {
+              "check": "ticket 101 restored to original values after test",
+              "pass": true
+            }
+          ],
+          "cleanup": "After verification, ticket 101 status and notes were restored to their original values."
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "checks_run": 27,
+    "checks_passed": 27,
+    "all_passed": true
+  }
+}

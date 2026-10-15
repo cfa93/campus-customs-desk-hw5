@@ -1,0 +1,39 @@
+# ---- Secrets: never commit real environment files or keys ----
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+*.pem
+*.key
+secrets*
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# ---- Node / frontend build ----
+node_modules/
+frontend/dist/
+frontend/dist-ssr/
+*.local
+*.tsbuildinfo
+
+# ---- Temporary files written by the app ----
+*.json.tmp
+output/audit_trail.unreadable-*.json
+
+# ---- Editor / OS / logs ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+
+# NOTE: data/*.db are intentionally committed (original + working copy).
